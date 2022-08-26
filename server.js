@@ -1,8 +1,52 @@
 var express=require("express");
 var app=express();
 var bodyParser= require("body-parser");
-//const { default: random } = require("random");
+var monsgoose=require("mongoose"); 
 var random=require("random");
+const { default: mongoose } = require("mongoose");
+
+mongoose.connect('mongodb+srv://mchaube:BgsbiIHp7kOFBstW@cluster0.aqybduh.mongodb.net/?retryWrites=true&w=majority')
+
+var db=mongoose.connection;
+db.on("error",()=>{
+    console.log("unable to connect to DB");
+})
+
+db.once('open',()=>{
+  console.log("connection successful!");
+})
+
+
+var BlogSchema=mongoose.Schema({
+    name:String,
+    price:Number,
+    quantity:Number,
+    author:String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+})
+
+var BookSchema=mongoose.Schema({
+    name:String,
+    price:Number,
+    quantity:Number,
+})
+
+var Book=mongoose.model('Book',BookSchema);
+var book1=new Book({name:"LLD",price:400,quantity:50});
+book1.save()
+.then((res)=>{
+    console.log(res);
+})
+.catch((err)=>{
+    console.log(err);
+})
+
 
 app.use(bodyParser.json());
 
@@ -10,6 +54,54 @@ app.listen(8000,()=>{
     console.log("your server is running on port 8000");
 })  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var users=[
     {id:47264287,name:"mayank",age:22},
     {id:237293,name:"akhilesh",age:22},
@@ -79,7 +171,7 @@ app.delete('/api/users/:id',(req,res)=>{
     users=users.filter((user)=>user.id!=parseInt(id));
     res.send(user);
 })
-
+*/
 
 /*
 
