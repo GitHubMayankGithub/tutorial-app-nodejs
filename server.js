@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 
 app.get("/",(req,res)=>{
-    res.json({message:"getting started with mvc archit3ecture"});
+    res.json({message:"getting started with mvc archit3ecture "});
 })
 
 var db=mongoose.connection;
