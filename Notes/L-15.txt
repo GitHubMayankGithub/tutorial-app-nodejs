@@ -1,0 +1,52 @@
+L-15 FS-17 Utkarsh
+______________________________________________________________________________________________________________
+Insert Row into table
+
+Insert document into collection
+
+Each schema maps to a mogo db collection i.e table
+
+
+Everything in Mongoose starts with a Schema. Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
+
+https://mongoosejs.com/docs/guide.html
+
+https://www.enterprisenetworkingplanet.com/data-center/sql-vs-nosql/
+
+
+One of the main differences between SQL and NoSQL is indexing. SQL uses a B-tree index which employs a hierarchical structure to store data. In contrast, NoSQL uses a hash index, which stores data in a key-value store. With a B-tree index, data is stored in an ordered manner, making it easy to retrieve specific values based on their position in the tree. However, this can also make updates and inserts more time-consuming, as the entire tree must be traversed to find the correct location for the new data.
+---------------------------------------------
+https://mongoosejs.com/docs/models.html
+
+Models are fancy constructors compiled from Schema definitions. An instance of a model is called a document. Models are responsible for creating and reading documents from the underlying MongoDB database.
+
+
+Model will map a schema to a particular table(collection).
+We can create multiple tables using single schema.
+Example:
+var BookSchema=mongoose.Schema({
+name:String,
+price:Number.
+....
+})
+
+var Book=mongoose.model('Book',BookSchema);
+
+Document :- Document is actual rwo we will insert in the collection in mongoose.
+
+Example:
+
+const newBook1=new mongoose.model('newBook',BookSchema);
+
+var book1=new Book({name:"System Design",price:500,quantity:30}) //book created not inserted
+
+no insert in the model
+
+book1.save()
+.then((res)=>{
+console.log(res);
+})
+.catch((err)=>{
+console.log(err);
+})
+
